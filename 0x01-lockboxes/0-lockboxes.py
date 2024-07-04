@@ -15,6 +15,9 @@ def canUnlockAll(boxes):
     Returns:
         bool: True if all boxes can be unlocked, False otherwise.
     """
+    if not isinstance(boxes, list) or len(boxes) == 0 or boxes is None:
+        return False
+
     arr = boxes[0]
     opened_boxes = [0]
     for box in arr:
