@@ -20,7 +20,6 @@ def canUnlockAll(boxes):
 
     opened_boxes = set([0])
     keys = set(boxes[0])
-    print(f"keys: {keys}")
 
     while keys:
         new_keys = set()
