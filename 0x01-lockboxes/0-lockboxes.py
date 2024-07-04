@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 """
 This module contains a function to determine if all the boxes can be unlocked.
 """
