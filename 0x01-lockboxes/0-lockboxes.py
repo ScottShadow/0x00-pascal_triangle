@@ -18,31 +18,46 @@ def canUnlockAll(boxes):
     if not isinstance(boxes, list) or len(boxes) == 0 or boxes is None:
         return False
 
-    arr = boxes[0]
-    opened_boxes = [0]
-    for box in arr:
-        if box not in opened_boxes:
-            opened_boxes.append(box)
-            open_box(box, boxes, opened_boxes)
-    if len(opened_boxes) == len(boxes):
-        return True
-    else:
-        return False
+    opened_boxes = set([0])
+    keys = set(boxes[0])
+    print(f"keys: {keys}")
+
+    while keys:
+        new_keys = set()
+        for key in keys:
+            if key not in opened_boxes and key < len(boxes):
+                opened_boxes.add(key)
+                if len(opened_boxes) == len(boxes):
+                    return True
+                new_keys.update(boxes[key])
+        keys = new_keys
+
+    return len(opened_boxes) == len(boxes)
 
 
-def open_box(box, boxes, opened_boxes):
+def canUnlockAll_simple(boxes):
     """
-    Recursively opens a box and adds its keys to the list of opened boxes.
+    Determines if all the boxes can be unlocked.
 
     Args:
-        box (int): The index of the box to open.
         boxes (list of list of int): A list of lists where each sublist
          represents a box and contains keys to other boxes.
-        opened_boxes (list of int): A list of indices of boxes that have
-         been opened.
+
+    Returns:
+        bool: True if all boxes can be unlocked_boxes, False otherwise.
     """
-    arr = boxes[box]
-    for i in arr:
-        if i not in opened_boxes:
-            opened_boxes.append(i)
-            open_box(i, boxes, opened_boxes)
+    if not boxes or not isinstance(boxes, list):
+        return False
+
+    unlocked_boxes = [0]
+    for n in unlocked_boxes:
+        for key in boxes[n]:
+            print(f"checking key boxes[{key}] in unlocked_boxes")
+            if key not in unlocked_boxes and key < len(boxes):
+                print(f"adding key {key}")
+                unlocked_boxes.append(key)
+                if len(unlocked_boxes) == len(boxes):
+                    return True
+    if len(unlocked_boxes) == len(boxes):
+        return True
+    return False
