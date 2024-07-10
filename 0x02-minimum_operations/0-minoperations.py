@@ -15,6 +15,8 @@ def minOperations(n: int) -> int:
         int: The minimum number of operations required to reach the number
         of characters.
     """
+    if not isinstance(n, int):
+        raise TypeError("n must be an integer")
     string = 'H'
     tempstring = ''
     copyall = 0
