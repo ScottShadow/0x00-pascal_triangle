@@ -17,12 +17,12 @@ def minOperations(n: int) -> int:
     """
     if not isinstance(n, int):
         raise TypeError("n must be an integer")
-    string = 'H'
-    tempstring = ''
+    string = 1
+    tempstring = 0
     copyall = 0
     paste = 0
-    while len(string) < n:
-        if n % len(string) == 0:
+    while string < n:
+        if n % string == 0:
             tempstring = string
             copyall += 1
 

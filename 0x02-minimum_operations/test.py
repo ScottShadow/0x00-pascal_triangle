@@ -8,6 +8,7 @@ class TestMinOperations(unittest.TestCase):
         self.assertEqual(minOperations(1), 0)  # No operations needed
         self.assertEqual(minOperations(0), 0)
         self.assertEqual(minOperations(-5), 0)
+        self.assertEqual(minOperations(2), 2)
         self.assertEqual(minOperations(4), 4)  # Copy, Paste, Paste, Paste
         # Copy, Paste, Copy, Paste, Paste
         self.assertEqual(minOperations(6), 5)
