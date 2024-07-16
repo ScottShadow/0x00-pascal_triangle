@@ -3,7 +3,24 @@
 This script parses log files and calculates statistics on the status codes
 and file sizes.
 """
+
 import sys
+from time import sleep
+
+
+def print_stats(stats_p: dict, file_size_p: int) -> None:
+    """
+    Prints the statistics calculated.
+    Args:
+        stats_p: Dictionary containing status code counts.
+        file_size_p: Total file size.
+    Returns:
+        None
+    """
+    print(f"File size: {file_size_p}")
+    for k, v in sorted(stats_p.items()):
+        if v:
+            print(f"{k}: {v}")
 
 
 if __name__ == '__main__':
@@ -11,20 +28,6 @@ if __name__ == '__main__':
     filesize, count = 0, 0
     codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
     stats = {k: 0 for k in codes}
-
-    def print_stats(stats: dict, file_size: int) -> None:
-        """
-        Prints the statistics calculated.
-        Args:
-            stats_p: Dictionary containing status code counts.
-            file_size_p: Total file size.
-        Returns:
-            None
-        """
-        print("File size: {:d}".format(file_size))
-        for k, v in sorted(stats.items()):
-            if v:
-                print("{}: {}".format(k, v))
 
     try:
         for line in sys.stdin:
@@ -44,5 +47,6 @@ if __name__ == '__main__':
                 print_stats(stats, filesize)
         print_stats(stats, filesize)
     except KeyboardInterrupt:
+        sleep(1)
         print_stats(stats, filesize)
         raise
