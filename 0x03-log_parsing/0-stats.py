@@ -4,7 +4,7 @@ This script parses log files and calculates statistics on the status codes
 and file sizes.
 """
 import sys
-from time import sleep
+
 
 if __name__ == '__main__':
 
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     codes = ["200", "301", "400", "401", "403", "404", "405", "500"]
     stats = {k: 0 for k in codes}
 
-    def print_stats(stats_p: dict, file_size_p: int) -> None:
+    def print_stats(stats: dict, file_size: int) -> None:
         """
         Prints the statistics calculated.
         Args:
@@ -21,10 +21,10 @@ if __name__ == '__main__':
         Returns:
             None
         """
-        print(f"File size: {file_size_p}")
-        for k, v in sorted(stats_p.items()):
+        print("File size: {:d}".format(file_size))
+        for k, v in sorted(stats.items()):
             if v:
-                print(f"{k}: {v}")
+                print("{}: {}".format(k, v))
 
     try:
         for line in sys.stdin:
