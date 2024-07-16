@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """
-
-
+This script parses log files and calculates statistics on the status codes
+and file sizes.
 """
-
 import sys
 from time import sleep
 
