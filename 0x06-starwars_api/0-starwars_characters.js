@@ -1,50 +1,20 @@
 #!/usr/bin/node
 const util = require('util');
 const request = util.promisify(require('request'));
-movie_id = process.argv[2];
+const filmID = process.argv[2];
 
+async function starwarsCharacters(filmId) {
+  const endpoint = 'https://swapi-api.hbtn.io/api/films/' + filmId;
+  let response = await (await request(endpoint)).body;
+  response = JSON.parse(response);
+  const characters = response.characters;
 
-async function starwarsCharacters(movie_id) {
-  if (!movie_id || isNaN(movie_id) || process.argv.length < 3) {
-    console.log('USE ./0-starwars_characters.js movie_id');
-    process.exit(1);
+  for (let i = 0; i < characters.length; i++) {
+    const urlCharacter = characters[i];
+    let character = await (await request(urlCharacter)).body;
+    character = JSON.parse(character);
+    console.log(character.name);
   }
-  // Define the URL
-  const url = `https://swapi-api.alx-tools.com/api/films/${movie_id}/`;
-
-  // Fetch JSON data
-  request({ url: url, json: true }, (error, response, body) => {
-    if (error) {
-      console.error('Error:', error);
-      return;
-    }
-
-    // Log the status code and response headers
-    //console.log(`Status Code: ${response.statusCode}`);
-    //console.log(`Response Headers: ${JSON.stringify(response.headers)}`);
-
-    // Check if the response status code is 200 (OK)
-    if (response.statusCode === 200) {
-      // Log the parsed JSON data
-      my_characters = body.characters;
-      for (let i = 0; i < my_characters.length; i++) {
-        request({ url: my_characters[i], json: true },
-          (error, response, body) => {
-            if (error) {
-              console.error('Error:', error);
-              return;
-            }
-            // Check if the response status code is 200 (OK)
-            if (response.statusCode === 200) {
-              // Log the parsed JSON data
-              console.log(body.name);
-            }
-          })
-      }
-    } else {
-      console.log(`Failed to retrieve data: ${response.statusCode}`);
-    }
-  });
 }
 
-starwarsCharacters(movie_id)
+starwarsCharacters(filmID);
