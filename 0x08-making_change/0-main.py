@@ -5,4 +5,4 @@ Main file for testing
 
 makeChange = __import__('0-making_change').makeChange
 
-print(makeChange([3, 4], 15))
+print(makeChange([2, 0, 2, 3], 16))

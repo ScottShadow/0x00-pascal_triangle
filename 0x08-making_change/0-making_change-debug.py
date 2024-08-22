@@ -11,6 +11,7 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
+    coins.sort(reverse=True)
     try:
         dp = [0] + [float("inf")] * (total)
         print(f"{dp}\n")
