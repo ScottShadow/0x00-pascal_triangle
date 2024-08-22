@@ -13,11 +13,13 @@ def makeChange(coins, total):
     count = 0
     i = 0
     while sum > 0:
-        if (sum - coins[i] > 0):
+        if i > (len(coins)-1):
+            return -1
+
+        if (sum - coins[i] >= 0):
             count += 1
             sum -= coins[i]
-        elif (sum - coins[i] <= 0):
+        else:
             i += 1
-            if i > (len(coins)-1):
-                return -1
+
     return count
