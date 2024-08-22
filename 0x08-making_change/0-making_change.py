@@ -56,7 +56,7 @@ def makeChange(coins, total):
         if my_sum == 0:
             return count
 
-        if my_sum > 0 and my_sum % last_coin == 0:
+        if my_sum > 0:
             result = makeChangeHelper(coins, my_sum, count)
             if result != -1:
                 return result
